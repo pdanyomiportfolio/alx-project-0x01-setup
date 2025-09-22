@@ -2,11 +2,7 @@ import UserCard from "@/components/common/UserCard";
 import Header from "@/components/layout/Header";
 import { UserProps } from "@/interfaces";
 
-interface UsersPageProps {
-  users: UserProps[];
-}
-
-const Users: React.FC<UsersPageProps> = ({ users }) => {
+const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
   return (
     <div className="flex flex-col h-screen">
       <Header />
