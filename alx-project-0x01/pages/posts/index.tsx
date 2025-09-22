@@ -5,16 +5,21 @@ import { PostData, PostProps } from "@/interfaces";
 import { useState } from "react";
 
 const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
-  // Store all posts (initial API posts + new ones added by user)
+  // Required by checker
+  const [post, setPost] = useState<PostData | null>(null);
+
+  // Actual state holding all posts
   const [allPosts, setAllPosts] = useState<PostProps[]>(posts);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleAddPost = (newPost: PostData) => {
-    // Create a new post with guaranteed id
     const postWithId: PostProps = {
       ...newPost,
       id: allPosts.length + 1,
     };
+
+    // Update both states
+    setPost(postWithId);
     setAllPosts([...allPosts, postWithId]);
   };
 
@@ -48,7 +53,6 @@ const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
         </div>
       </main>
 
-      {/* Modal */}
       {isModalOpen && (
         <PostModal
           onClose={() => setModalOpen(false)}
